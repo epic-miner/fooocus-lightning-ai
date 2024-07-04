@@ -1,48 +1,30 @@
 #!/bin/bash
 
-# Set this variable to true to install to the temporary folder, or to false to have the installation in permanent storage.
+# Set this variable to false to ensure installation in permanent storage.
 install_in_temp_dir=false
 
+# Check if the Fooocus repository exists, if not clone it
 if [ ! -d "Fooocus" ]
 then
   git clone https://github.com/lllyasviel/Fooocus.git
 fi
 cd Fooocus
 git pull
-if [ "$install_in_temp_dir" = true ]
+
+# Set the installation folder
+echo "Installation folder: ~/.conda/envs/fooocus"
+if [ -L ~/.conda/envs/fooocus ]
 then
-  echo "Installation folder: /tmp/fooocus_env"
-  if [ ! -L ~/.conda/envs/fooocus ]
-  then
-    echo "removing ~/.conda/envs/fooocus"
-    rm -rf ~/.conda/envs/fooocus
-    rmdir ~/.conda/envs/fooocus
-    ln -s /tmp/fooocus_env ~/.conda/envs/fooocus
-  fi
-else
-  echo "Installation folder: ~/.conda/envs/fooocus"
-  if [ -L ~/.conda/envs/fooocus ]
-  then
-    rm ~/.conda/envs/fooocus
-  fi
+  rm ~/.conda/envs/fooocus
 fi
+
 eval "$(conda shell.bash hook)"
-if [ ! -d ~/.conda/envs/fooocus ]
-then 
-    echo ".conda/envs/fooocus is not a directory or does not exist"
-fi
-if [ ! -d /tmp/fooocus_env ] 
-then
-    echo "/tmp/fooocus_env is currently not a directory"
-fi
-if [ "$install_in_temp_dir" = true ] && [ ! -d /tmp/fooocus_env ] || [ "$install_in_temp_dir" = false ] && [ ! -d ~/.conda/envs/fooocus ]
-then
+
+# Check if the conda environment already exists
+if conda info --envs | grep -q '^fooocus'; then
+    echo "The fooocus environment already exists. Skipping installation."
+else
     echo "Installing"
-    if [ "$install_in_temp_dir" = true ] && [ ! -d /tmp/fooocus_env ]
-    then
-        echo "Creating /tmp/fooocus_env"
-        mkdir /tmp/fooocus_env
-    fi
     conda env create -f environment.yaml
     conda activate fooocus
     pwd
@@ -96,8 +78,8 @@ conda activate fooocus
 cd ..
 if [ $# -eq 0 ]
 then
-  python start-ngrok-zrok.py 
+  python Fooocus/entry_with_update.py --always-high-vram 
 elif [ $1 = "reset" ]
 then
-  python start-ngrok-zrok.py --reset 
+  python Fooocus/entry_with_update.py --always-high-vram --reset 
 fi
