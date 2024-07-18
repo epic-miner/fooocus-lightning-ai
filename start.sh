@@ -1,21 +1,34 @@
 #!/bin/bash
 
+# Function to check if Cloudflared is installed
+check_cloudflared() {
+    command -v cloudflared >/dev/null 2>&1
+}
+
 # Set this variable to false to ensure installation in permanent storage.
 install_in_temp_dir=false
 
+# Check if Cloudflared is already installed
+if ! check_cloudflared; then
+    # Download and setup Cloudflared
+    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
+    chmod +x cloudflared
+    sudo mv cloudflared /usr/local/bin/
+else
+    echo "Cloudflared is already installed. Skipping installation."
+fi
+
 # Check if the Fooocus repository exists, if not clone it
-if [ ! -d "Fooocus" ]
-then
-  git clone https://github.com/lllyasviel/Fooocus.git
+if [ ! -d "Fooocus" ]; then
+    git clone https://github.com/lllyasviel/Fooocus.git
 fi
 cd Fooocus
 git pull
 
 # Set the installation folder
 echo "Installation folder: ~/.conda/envs/fooocus"
-if [ -L ~/.conda/envs/fooocus ]
-then
-  rm ~/.conda/envs/fooocus
+if [ -L ~/.conda/envs/fooocus ]; then
+    rm ~/.conda/envs/fooocus
 fi
 
 eval "$(conda shell.bash hook)"
@@ -50,11 +63,6 @@ else
     rm -f /opt/conda/.condarc
     conda install -y conda-forge::glib
     rm -rf ~/.cache/pip
-
-    # Download and setup Cloudflared
-    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
-    chmod +x cloudflared
-    sudo mv cloudflared /usr/local/bin/
 fi
 
 # Removed the section for configuring checkpoints-real-folder
@@ -81,10 +89,8 @@ fi
 
 conda activate fooocus
 cd ..
-if [ $# -eq 0 ]
-then
-  python Fooocus/entry_with_update.py --always-high-vram & cloudflared tunnel --url localhost:7865
-elif [ $1 = "reset" ]
-then
-  python Fooocus/entry_with_update.py --always-high-vram --reset & cloudflared tunnel --url localhost:7865
+if [ $# -eq 0 ]; then
+    python Fooocus/entry_with_update.py --always-high-vram & cloudflared tunnel --url localhost:7865
+elif [ $1 = "reset" ]; then
+    python Fooocus/entry_with_update.py --always-high-vram --reset & cloudflared tunnel --url localhost:7865
 fi
