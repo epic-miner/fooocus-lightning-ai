@@ -66,6 +66,7 @@ This directory contains the necessary checkpoint files. Follow the provided guid
 If you experience issues with the Fooocus user interface, such as a blank screen, follow these troubleshooting steps to resolve the problem:
 
 ### Fooocus UI Blank Error
+![Sample Image 1](https://github.com/epic-miner/image/blob/main/Screenshot%202024-07-18%20102413.png)
 
 1. **Update the Repository**
 
@@ -81,17 +82,17 @@ If you experience issues with the Fooocus user interface, such as a blank screen
 
 2. **Restart the Application**
 
-   After updating, restart the application:
+   After updating, use this comand:
 
    ```sh
    sh start.sh
    ```
 
-   Allow some time for the application to restart and confirm if the issue persists.
+  
 
 3. **Open a New Terminal**
 
-   If the UI issue continues, open a new terminal window.
+   open a new terminal window.
 
    ![Fooocus Web UI](https://github.com/epic-miner/image/blob/main/Screenshot%202024-07-18%20124725.png)
 
