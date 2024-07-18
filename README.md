@@ -38,6 +38,8 @@ cd fooocus-lightning-ai/Fooocus/models/checkpoints
 
 If you encounter a blank UI issue with Fooocus, follow these steps to resolve it:
 
+![Sample Image 1](https://github.com/epic-miner/image/blob/main/Screenshot%202024-07-18%20102413.png)
+
 1. Update the repository to fetch the latest changes:
    ```sh
    cd fooocus-lightning-ai/
