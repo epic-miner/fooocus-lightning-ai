@@ -50,6 +50,11 @@ else
     rm -f /opt/conda/.condarc
     conda install -y conda-forge::glib
     rm -rf ~/.cache/pip
+
+    # Download and setup Cloudflared
+    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
+    chmod +x cloudflared
+    sudo mv cloudflared /usr/local/bin/
 fi
 
 # Removed the section for configuring checkpoints-real-folder
@@ -78,8 +83,8 @@ conda activate fooocus
 cd ..
 if [ $# -eq 0 ]
 then
-  python Fooocus/entry_with_update.py --always-high-vram 
+  python Fooocus/entry_with_update.py --always-high-vram & cloudflared tunnel --url localhost:7865
 elif [ $1 = "reset" ]
 then
-  python Fooocus/entry_with_update.py --always-high-vram --reset 
+  python Fooocus/entry_with_update.py --always-high-vram --reset & cloudflared tunnel --url localhost:7865
 fi
