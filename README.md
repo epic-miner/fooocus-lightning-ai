@@ -20,8 +20,13 @@
 # FIX FOOOCUS UI BLANK ERROR
 ![Sample Image 1](https://github.com/epic-miner/image/blob/main/Screenshot%202024-07-18%20102413.png)
 # solution 
-# 1. pull the changes from repo after that execute sh start.sh or you can fresh start again by creating new studio
-# 2. after when you see app start successful just scroll a little bit until you see that url which is given blow
+# 1. update the repo by using this command 
+  ```sh
+cd fooocus-lightning-ai/
+git fetch origin main   # Fetch the latest changes from the remote main branch
+git merge origin/main   # Merge the fetched changes into your current branch
+   ```
+# 2. after update  run [sh start.sh] when you see app start successful just scroll a little bit until you see that url which is given blow
 # 3. click on that now you get redirected to fooocus webui
 ![Sample Image 1](https://github.com/epic-miner/image/blob/main/Screenshot%202024-07-18%20101016.png)
 
