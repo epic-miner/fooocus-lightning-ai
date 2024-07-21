@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install ufw -y
+sudo ufw allow 7865
 # Function to check if Cloudflared is installed
 check_cloudflared() {
     command -v cloudflared >/dev/null 2>&1
