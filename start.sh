@@ -92,7 +92,7 @@ fi
 conda activate fooocus
 cd ..
 if [ $# -eq 0 ]; then
-    python Fooocus/entry_with_update.py 
+    python Fooocus/entry_with_update.py --always-high-vram
 elif [ $1 = "reset" ]; then
     python Fooocus/entry_with_update.py --always-high-vram --reset
 fi
