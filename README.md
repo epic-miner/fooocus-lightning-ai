@@ -114,3 +114,15 @@ If you experience issues with the Fooocus user interface, such as a blank screen
    ![Fooocus Web UI](https://github.com/epic-miner/image/blob/main/Screenshot%202024-07-18%20101016.png)
 
    If you encounter any additional issues, refer to the documentation or reach out to the support team for further assistance.
+   ## Video Tutorial
+
+To help you get started with Fooocus Lightning AI, we have created a comprehensive video tutorial that walks you through the setup and usage of the system. Watch the full tutorial below:
+
+<p align="center">
+  <a href="https://youtu.be/M922HHKUta8?si=I_TRWMi1yo2dERUg">
+    <img src="https://img.youtube.com/vi/M922HHKUta8/0.jpg" alt="Watch the Tutorial" />
+  </a>
+</p>
+
+Click the image above or [here](https://youtu.be/M922HHKUta8?si=I_TRWMi1yo2dERUg) to view the tutorial.
+
